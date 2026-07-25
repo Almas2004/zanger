@@ -1,0 +1,70 @@
+(function () {
+  const icons = {
+    shield: '<svg viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3Z"/><path d="m9 12 2 2 4-5"/></svg>',
+    user: '<svg viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>',
+    lock: '<svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>',
+    map: '<svg viewBox="0 0 24 24"><path d="M12 22s7-5.4 7-12A7 7 0 0 0 5 10c0 6.6 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    spark: '<svg viewBox="0 0 24 24"><path d="m12 2 2.6 6.9L22 12l-7.4 3.1L12 22l-2.6-6.9L2 12l7.4-3.1L12 2Z"/></svg>',
+    briefcase: '<svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5h8v2M3 12h18"/></svg>',
+    gavel: '<svg viewBox="0 0 24 24"><path d="m14 5 5 5M5 14l5 5M9 10l5 5M3 21h8M13 6l-7 7 5 5 7-7-5-5Z"/></svg>',
+    coins: '<svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
+    scale: '<svg viewBox="0 0 24 24"><path d="M12 3v18M5 6h14M7 6l-4 7h8L7 6Zm10 0-4 7h8l-4-7Z"/></svg>',
+    landmark: '<svg viewBox="0 0 24 24"><path d="M3 21h18M5 10h14M6 10v8M10 10v8M14 10v8M18 10v8M12 3 4 8h16l-8-5Z"/></svg>',
+    building: '<svg viewBox="0 0 24 24"><path d="M4 21V5a2 2 0 0 1 2-2h9v18M15 8h3a2 2 0 0 1 2 2v11M8 7h3M8 11h3M8 15h3"/></svg>',
+    file: '<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/></svg>',
+    handshake: '<svg viewBox="0 0 24 24"><path d="m8 12 3 3a2 2 0 0 0 3 0l1-1M7 17l-4-4 4-4M17 17l4-4-4-4M3 13h5l3-3a2 2 0 0 1 3 0l2 2h5"/></svg>',
+    users: '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>'
+  };
+
+  function renderIcon(name) {
+    return icons[name] || icons.shield;
+  }
+
+  function renderServices() {
+    document.querySelectorAll("[data-services-grid]").forEach((grid) => {
+      const limit = Number(grid.dataset.limit || window.ZANGER_SERVICES.length);
+      const services = window.ZANGER_SERVICES.slice(0, limit);
+      grid.innerHTML = services.map((service) => `
+        <article class="service-card">
+          <i>${renderIcon(service.icon)}</i>
+          <h3>${service.title}</h3>
+          <p>${service.description}</p>
+          <a href="service.html?slug=${encodeURIComponent(service.slug)}">Подробнее →</a>
+        </article>
+      `).join("");
+    });
+  }
+
+  function renderOffices() {
+    const target = document.querySelector("[data-offices]");
+    if (!target) return;
+    target.innerHTML = window.ZANGER_CONFIG.offices.map((office) => `
+      <article class="contact-card">
+        <i>${renderIcon("map")}</i>
+        <h3>${office.city}</h3>
+        <p>${office.address}</p>
+        <a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/${encodeURIComponent(office.address)}">Открыть на карте</a>
+      </article>
+    `).join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("[data-icon]").forEach((node) => { node.innerHTML = renderIcon(node.dataset.icon); });
+    document.querySelectorAll("[data-year]").forEach((node) => { node.textContent = new Date().getFullYear(); });
+    document.querySelectorAll("[data-phone-link]").forEach((node) => { node.textContent = window.ZANGER_CONFIG.phone; node.href = window.ZANGER_CONFIG.phoneHref; });
+    document.querySelectorAll("[data-whatsapp-link]").forEach((node) => { node.href = window.ZANGER_CONFIG.whatsappHref; });
+    document.querySelectorAll("[data-email-link]").forEach((node) => { node.textContent = window.ZANGER_CONFIG.email; node.href = window.ZANGER_CONFIG.emailHref; });
+    renderServices();
+    renderOffices();
+    document.querySelector("[data-show-all-services]")?.addEventListener("click", (event) => {
+      const grid = document.querySelector("[data-services-grid]");
+      grid && delete grid.dataset.limit;
+      renderServices();
+      event.currentTarget.remove();
+    });
+    const observer = "IntersectionObserver" in window && new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible"));
+    }, { threshold: .12 });
+    document.querySelectorAll(".section-animate").forEach((section) => observer ? observer.observe(section) : section.classList.add("is-visible"));
+  });
+})();

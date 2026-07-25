@@ -1,0 +1,14 @@
+:root {
+  --navy: #071a33;
+  --navy-2: #102b4e;
+  --gold: #b68a42;
+  --gold-light: #d3b16d;
+  --ink: #111827;
+  --muted: #5f6875;
+  --line: #e5e9ef;
+  --soft: #f5f6f8;
+  --white: #fff;
+  --shadow: 0 22px 60px rgba(7, 26, 51, .12);
+  --serif: "Playfair Display", Georgia, serif;
+  --sans: "Inter", Arial, sans-serif;
+}
