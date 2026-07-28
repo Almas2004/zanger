@@ -15,7 +15,9 @@
   function fillSelects() {
     document.querySelectorAll("[data-service-select]").forEach((select) => {
       const current = select.value;
-      select.innerHTML = '<option value="">Интересующая услуга</option>' + window.ZANGER_SERVICES.map((service) => `<option value="${service.title}">${service.title}</option>`).join("");
+      const services = window.ZANGER_I18N?.services ? window.ZANGER_I18N.services() : window.ZANGER_SERVICES;
+      const placeholder = window.ZANGER_I18N?.t("forms.servicePlaceholder") || "Интересующая услуга";
+      select.innerHTML = `<option value="">${placeholder}</option>` + services.map((service) => `<option value="${service.title}">${service.title}</option>`).join("");
       if (current) select.value = current;
     });
   }
@@ -27,18 +29,19 @@
     const data = new FormData(form);
     const phoneDigits = String(data.get("phone") || "").replace(/\D/g, "");
     if (!data.get("name") || phoneDigits.length < 11 || !data.get("message") || !data.get("agree")) {
-      if (error) error.textContent = "Заполните имя, корректный телефон, описание вопроса и согласие.";
+      if (error) error.textContent = window.ZANGER_I18N?.t("forms.error") || "Заполните имя, корректный телефон, описание вопроса и согласие.";
       return;
     }
     if (error) error.textContent = "";
+    const t = (key) => window.ZANGER_I18N?.t(key) || key;
     const message = [
-      "Здравствуйте! Хочу получить юридическую консультацию.",
+      t("forms.whatsappGreeting"),
       "",
-      "Имя: " + data.get("name"),
-      "Телефон: " + data.get("phone"),
-      "Город: " + (data.get("city") || "не указан"),
-      "Услуга: " + (data.get("service") || "не выбрана"),
-      "Описание ситуации: " + data.get("message")
+      t("forms.fieldName") + ": " + data.get("name"),
+      t("forms.fieldPhone") + ": " + data.get("phone"),
+      t("forms.fieldCity") + ": " + (data.get("city") || t("forms.notSpecified")),
+      t("forms.fieldService") + ": " + (data.get("service") || t("forms.notSelected")),
+      t("forms.fieldMessage") + ": " + data.get("message")
     ].join("\n");
     window.open(`https://wa.me/${window.ZANGER_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
     form.querySelector("button[type='submit']").disabled = true;

@@ -2,9 +2,9 @@ window.ZANGER_CONFIG = {
   company: "ZANGER CONSULTING GROUP",
   phone: "+7 707 163 3899",
   phoneHref: "tel:+77071633899",
-  whatsapp: "+7 702 777 12 53",
-  whatsappNumber: "77027771253",
-  whatsappHref: "https://wa.me/77027771253",
+  whatsapp: "+7 707 163 3899",
+  whatsappNumber: "77071633899",
+  whatsappHref: "https://wa.me/77071633899",
   email: "zanger.consulting.group001@gmail.com",
   emailHref: "mailto:zanger.consulting.group001@gmail.com",
   offices: [

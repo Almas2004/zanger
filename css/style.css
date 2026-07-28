@@ -41,6 +41,19 @@
   line-height: 1.75;
 }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
+.hero-whatsapp {
+  gap: 11px;
+}
+.hero-whatsapp svg {
+  width: 23px;
+  height: 23px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+.hero-whatsapp:hover,
+.hero-whatsapp:focus-visible {
+  background: #102b4e;
+}
 .hero-badges {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -81,6 +94,83 @@
   object-position: center center;
 }
 .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.service-catalog-section { background: #fff; }
+.service-catalog {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.service-category {
+  border: 1px solid rgba(7,26,51,.1);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 12px 28px rgba(7,26,51,.045);
+  overflow: hidden;
+}
+.service-category summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  color: var(--navy);
+  cursor: pointer;
+  list-style: none;
+}
+.service-category summary::-webkit-details-marker { display: none; }
+.service-category summary::after {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(7,26,51,.14);
+  border-radius: 50%;
+  color: var(--gold);
+  content: "↓";
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  font-weight: 900;
+  transition: transform .2s ease, border-color .2s ease;
+}
+.service-category[open] summary::after {
+  border-color: rgba(182,138,66,.42);
+  transform: rotate(180deg);
+}
+.service-category summary span {
+  min-width: 0;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 800;
+  line-height: 1.16;
+}
+.service-category summary small {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.service-category-list {
+  padding: 0 24px 18px;
+}
+.service-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 0;
+  border-top: 1px solid var(--line);
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.service-line span { min-width: 0; }
+.service-line b {
+  color: var(--gold);
+  font-size: 18px;
+  transition: transform .2s ease;
+}
+.service-line:hover b,
+.service-line:focus-visible b { transform: translateX(3px); }
 .advantages {
   position: relative;
   overflow: hidden;

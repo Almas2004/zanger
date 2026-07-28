@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Услуги — ZANGER CONSULTING GROUP</title>
-    <meta name="description" content="Все юридические услуги ZANGER CONSULTING GROUP.">
+    <meta name="description" data-i18n-content="meta.servicesDescription" content="Все юридические услуги ZANGER CONSULTING GROUP.">
     <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,14 +15,14 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
   </head>
-  <body>
+  <body data-page="services">
     <div id="site-header"></div>
     <main>
       <section class="page-hero">
         <div class="container">
-          <p class="eyebrow">Все услуги</p>
-          <h1>Юридическая поддержка для бизнеса и частных клиентов</h1>
-          <p>Выберите направление, чтобы посмотреть подробности и отправить заявку.</p>
+          <p class="eyebrow" data-i18n="servicesPage.eyebrow">Все услуги</p>
+          <h1 data-i18n="servicesPage.title">Юридическая поддержка для бизнеса и частных клиентов</h1>
+          <p data-i18n="servicesPage.text">Выберите направление, чтобы посмотреть подробности и отправить заявку.</p>
         </div>
       </section>
       <section class="section section-soft">
@@ -30,10 +30,21 @@
           <div class="services-grid" data-services-grid></div>
         </div>
       </section>
+      <section class="section service-catalog-section" id="service-catalog">
+        <div class="container">
+          <div class="section-title">
+            <p class="eyebrow" data-i18n="servicesPage.catalogEyebrow">Полный каталог</p>
+            <h2 data-i18n="servicesPage.catalogTitle">Услуги по категориям</h2>
+            <p data-i18n="servicesPage.catalogText">Список сгруппирован по направлениям, чтобы быстро найти нужный запрос и написать нам в WhatsApp.</p>
+          </div>
+          <div class="service-catalog" data-service-catalog></div>
+        </div>
+      </section>
     </main>
     <div id="site-footer"></div>
     <script src="js/config.js"></script>
     <script src="js/services-data.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/layout.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/form.js"></script>

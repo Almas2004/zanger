@@ -22,14 +22,15 @@
 
   function renderServices() {
     document.querySelectorAll("[data-services-grid]").forEach((grid) => {
-      const limit = Number(grid.dataset.limit || window.ZANGER_SERVICES.length);
-      const services = window.ZANGER_SERVICES.slice(0, limit);
+      const allServices = window.ZANGER_I18N?.services ? window.ZANGER_I18N.services() : window.ZANGER_SERVICES;
+      const limit = Number(grid.dataset.limit || allServices.length);
+      const services = allServices.slice(0, limit);
       grid.innerHTML = services.map((service) => `
         <article class="service-card">
           <i>${renderIcon(service.icon)}</i>
           <h3>${service.title}</h3>
           <p>${service.description}</p>
-          <a href="service.html?slug=${encodeURIComponent(service.slug)}">Подробнее →</a>
+          <a href="service.html?slug=${encodeURIComponent(service.slug)}">${window.ZANGER_I18N?.t("servicePage.more") || "Подробнее →"}</a>
         </article>
       `).join("");
     });
@@ -38,30 +39,79 @@
   function renderOffices() {
     const target = document.querySelector("[data-offices]");
     if (!target) return;
-    target.innerHTML = window.ZANGER_CONFIG.offices.map((office) => `
+    const offices = window.ZANGER_I18N?.offices ? window.ZANGER_I18N.offices() : window.ZANGER_CONFIG.offices;
+    target.innerHTML = offices.map((office) => `
       <article class="contact-card${office.isMain ? " contact-card-main" : ""}">
         <i>${renderIcon("map")}</i>
         <h3>${office.city}</h3>
         <p>${office.address}</p>
-        <a target="_blank" rel="noopener noreferrer" href="${office.mapUrl || `https://2gis.kz/search/${encodeURIComponent(office.address)}`}">Открыть на карте</a>
+        <a target="_blank" rel="noopener noreferrer" href="${office.mapUrl || `https://2gis.kz/search/${encodeURIComponent(office.address)}`}">${window.ZANGER_I18N?.t("contacts.map") || "Открыть на карте"}</a>
       </article>
     `).join("");
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  function whatsappServiceHref(serviceName) {
+    const greeting = window.ZANGER_I18N?.t("forms.whatsappGreeting") || "Здравствуйте! Хочу получить юридическую консультацию.";
+    const serviceLabel = window.ZANGER_I18N?.t("forms.fieldService") || "Услуга";
+    const message = `${greeting}\n\n${serviceLabel}: ${serviceName}`;
+    return `https://wa.me/${window.ZANGER_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  }
+
+  function heroWhatsappHref() {
+    const message = window.ZANGER_I18N?.t("home.heroWhatsappMessage") || "Здравствуйте! Хочу получить юридическую консультацию.";
+    return `https://wa.me/${window.ZANGER_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  }
+
+  function updateHeroWhatsapp() {
+    document.querySelectorAll("[data-hero-whatsapp]").forEach((link) => {
+      link.href = heroWhatsappHref();
+      link.setAttribute("aria-label", window.ZANGER_I18N?.t("home.heroWhatsappAria") || "Написать в WhatsApp для получения юридической консультации");
+      link.setAttribute("title", window.ZANGER_I18N?.t("home.heroWhatsappTitle") || "Написать в WhatsApp");
+    });
+  }
+
+  function renderServiceCatalog() {
+    const target = document.querySelector("[data-service-catalog]");
+    if (!target || !window.ZANGER_I18N?.catalog) return;
+    const categories = window.ZANGER_I18N.catalog();
+    const countLabel = window.ZANGER_I18N.t("servicesPage.itemCount");
+    const actionLabel = window.ZANGER_I18N.t("servicesPage.writeWhatsapp");
+
+    target.innerHTML = categories.map((category, index) => `
+      <details class="service-category" ${index === 0 ? "open" : ""}>
+        <summary>
+          <span>${category.title}</span>
+          <small>${category.items.length} ${countLabel}</small>
+        </summary>
+        <div class="service-category-list">
+          ${category.items.map((item) => `
+            <a class="service-line" href="${whatsappServiceHref(item)}" target="_blank" rel="noopener noreferrer" aria-label="${actionLabel}: ${item}">
+              <span>${item}</span>
+              <b aria-hidden="true">→</b>
+            </a>
+          `).join("")}
+        </div>
+      </details>
+    `).join("");
+  }
+
+  function refresh() {
     document.querySelectorAll("[data-icon]").forEach((node) => { node.innerHTML = renderIcon(node.dataset.icon); });
     document.querySelectorAll("[data-year]").forEach((node) => { node.textContent = new Date().getFullYear(); });
     document.querySelectorAll("[data-phone-link]").forEach((node) => { node.textContent = window.ZANGER_CONFIG.phone; node.href = window.ZANGER_CONFIG.phoneHref; });
     document.querySelectorAll("[data-whatsapp-link]").forEach((node) => { node.href = window.ZANGER_CONFIG.whatsappHref; });
     document.querySelectorAll("[data-email-link]").forEach((node) => { node.textContent = window.ZANGER_CONFIG.email; node.href = window.ZANGER_CONFIG.emailHref; });
+    window.ZANGER_I18N?.applyTranslations?.();
     renderServices();
     renderOffices();
-    document.querySelector("[data-show-all-services]")?.addEventListener("click", (event) => {
-      const grid = document.querySelector("[data-services-grid]");
-      grid && delete grid.dataset.limit;
-      renderServices();
-      event.currentTarget.remove();
-    });
+    renderServiceCatalog();
+    updateHeroWhatsapp();
+  }
+
+  window.ZANGER_MAIN = { refresh, renderServices, renderOffices, renderServiceCatalog, renderIcon };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    refresh();
     const observer = "IntersectionObserver" in window && new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible"));
     }, { threshold: .12 });

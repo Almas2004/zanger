@@ -1,7 +1,20 @@
+@media (max-width: 1400px) {
+  .header-inner { gap: clamp(14px, 1.6vw, 26px); }
+  .main-nav { gap: clamp(14px, 1.45vw, 26px); }
+}
+
+@media (max-width: 1280px) {
+  .main-nav,
+  .header-phone { font-size: 14px; }
+  .logo-image { width: clamp(235px, 19vw, 270px); }
+}
+
 @media (max-width: 1180px) {
-  .header-phone,
-  .header-actions > .btn { display: none; }
+  .header-actions > .header-phone { display: none; }
   .menu-toggle { display: block; }
+  .header-inner {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
   .main-nav {
     position: absolute;
     top: 86px;
@@ -19,6 +32,14 @@
   }
   .main-nav.is-open { display: flex; }
   .main-nav a { padding: 14px 0; }
+  .mobile-nav-actions {
+    display: grid;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .mobile-nav-actions .header-phone { display: inline-flex; }
+  .mobile-nav-actions .lang-switcher { width: max-content; }
   .hero-grid { grid-template-columns: minmax(0, .98fr) minmax(390px, 1.02fr); }
   .hero h1 { font-size: clamp(46px, 4.6vw, 56px); }
   .hero-photo { width: min(84vw, 940px); right: 0; }
@@ -139,6 +160,7 @@
 @media (max-width: 640px) {
   .container { width: min(100% - 28px, 560px); }
   .services-grid,
+  .service-catalog,
   .principles,
   .consult-form { grid-template-columns: 1fr; }
   .consult-form textarea,
@@ -146,6 +168,7 @@
   .consult-form .form-error,
   .consult-form button { grid-column: auto; }
   .hero-actions { display: grid; }
+  .hero-actions .btn { width: 100%; min-height: 54px; }
   .hero-badges { grid-template-columns: 1fr; gap: 8px; }
   .advantages-grid { grid-template-columns: 1fr; }
   .hero-photo {
@@ -156,6 +179,10 @@
   }
   .hero-photo::before { display: none; }
   .service-card { min-height: 250px; padding: 30px 26px; }
+  .service-category summary { padding: 20px 18px; }
+  .service-category summary span { font-size: 20px; }
+  .service-category-list { padding: 0 18px 16px; }
+  .service-line { font-size: 14px; }
   .about-panel { min-height: 0; }
   .consultation-card { padding: 30px 22px; gap: 28px; }
   .modal-dialog { padding: 28px 18px; }
@@ -174,7 +201,10 @@
 
 @media (max-width: 420px) {
   .container { width: min(100% - 24px, 390px); }
-  .logo-image { width: clamp(170px, 54vw, 205px); height: auto; }
+  .header-inner { gap: 8px; }
+  .header-actions { gap: 8px; }
+  .lang-switcher button { min-width: 28px; min-height: 28px; font-size: 11px; }
+  .logo-image { width: clamp(150px, 50vw, 190px); height: auto; }
   .hero h1 { font-size: clamp(34px, 10.4vw, 40px); }
   .hero h1 .hero-line { white-space: normal; }
   .section-title h2,
