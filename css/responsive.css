@@ -19,9 +19,9 @@
   }
   .main-nav.is-open { display: flex; }
   .main-nav a { padding: 14px 0; }
-  .hero-grid { grid-template-columns: minmax(520px, .98fr) minmax(390px, 1.02fr); }
-  .hero h1 { font-size: clamp(48px, 5vw, 56px); }
-  .hero-photo { width: min(51vw, 760px); right: 0; }
+  .hero-grid { grid-template-columns: minmax(0, .98fr) minmax(390px, 1.02fr); }
+  .hero h1 { font-size: clamp(46px, 4.6vw, 56px); }
+  .hero-photo { width: min(84vw, 940px); right: 0; }
   .advantages { padding: 72px 0 66px; }
   .advantages-grid { grid-template-columns: minmax(360px, 1.2fr) repeat(3, 1fr); gap: 24px; }
   .advantages h2 { max-width: 470px; font-size: clamp(34px, 3vw, 42px); }
@@ -32,14 +32,45 @@
   .service-hero-grid,
   .service-body-grid { grid-template-columns: 1fr; }
   .about-grid { gap: 54px; }
-  .about-panel { min-height: 430px; }
+  .about-panel { min-height: 0; }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .hero {
+    min-height: auto;
+    background: linear-gradient(180deg, #fff 0%, #f8f9fb 100%);
+  }
+  .hero-grid {
+    display: flex;
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 44px 0 0;
+  }
+  .hero-content { width: 100%; max-width: 100%; min-width: 0; }
+  .hero h1 {
+    max-width: 100%;
+    font-size: clamp(44px, 5.4vw, 54px);
+    line-height: 1.02;
+  }
+  .hero h1 .hero-line { white-space: normal; }
+  .hero-photo {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+  .hero-photo::before { display: none; }
+  .hero-photo picture { height: auto; }
+  .hero-photo img { height: auto; object-position: center center; }
 }
 
 @media (max-width: 900px) {
   .container { width: min(100% - 36px, 760px); }
   .header-inner { min-height: 76px; }
-  .logo-mark { width: 44px; height: 51px; }
-  .logo-text strong { font-size: 25px; }
+  .logo-image { width: clamp(190px, 28vw, 235px); height: auto; }
   .main-nav { top: 76px; right: 18px; left: 18px; }
   .hero {
     min-height: auto;
@@ -52,12 +83,13 @@
     align-items: stretch;
     padding: 44px 0 0;
   }
-  .hero-content { max-width: 100%; }
+  .hero-content { width: 100%; max-width: 100%; min-width: 0; }
   .hero h1 {
-    max-width: 720px;
-    font-size: clamp(42px, 9vw, 58px);
+    max-width: 100%;
+    font-size: clamp(40px, 6.4vw, 54px);
     line-height: 1.02;
   }
+  .hero h1 .hero-line { white-space: normal; }
   .hero-lead { max-width: 650px; font-size: 16px; }
   .hero-badges {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -68,12 +100,16 @@
     position: relative;
     top: auto;
     right: auto;
-    width: calc(100% + 36px);
-    height: 430px;
-    margin: 0 -18px;
+    width: calc(100vw - 36px);
+    max-width: calc(100vw - 36px);
+    flex: 0 0 auto;
+    align-self: flex-start;
+    height: auto;
+    margin: 0;
   }
-  .hero-photo::before { width: 18%; }
-  .hero-photo img { object-position: 62% center; }
+  .hero-photo::before { display: none; }
+  .hero-photo picture { height: auto; }
+  .hero-photo img { height: auto; object-position: 68% center; }
   .section { padding: 78px 0; }
   .advantages-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .advantages-heading { grid-column: 1 / -1; }
@@ -113,13 +149,14 @@
   .hero-badges { grid-template-columns: 1fr; gap: 8px; }
   .advantages-grid { grid-template-columns: 1fr; }
   .hero-photo {
-    width: calc(100% + 28px);
-    height: 330px;
-    margin: 0 -14px;
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+    height: auto;
+    margin: 0;
   }
   .hero-photo::before { display: none; }
   .service-card { min-height: 250px; padding: 30px 26px; }
-  .about-panel { min-height: 340px; padding: 34px; }
+  .about-panel { min-height: 0; }
   .consultation-card { padding: 30px 22px; gap: 28px; }
   .modal-dialog { padding: 28px 18px; }
   .whatsapp-float {
@@ -137,17 +174,18 @@
 
 @media (max-width: 420px) {
   .container { width: min(100% - 24px, 390px); }
-  .logo-text small { font-size: 9px; }
-  .hero h1 { font-size: 39px; }
+  .logo-image { width: clamp(170px, 54vw, 205px); height: auto; }
+  .hero h1 { font-size: clamp(34px, 10.4vw, 40px); }
   .hero h1 .hero-line { white-space: normal; }
   .section-title h2,
   .about h2,
   .advantages h2,
   .consultation-card h2 { font-size: 32px; }
   .hero-photo {
-    width: calc(100% + 24px);
-    height: 295px;
-    margin: 0 -12px;
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+    height: auto;
+    margin: 0;
   }
   .service-hero { padding: 56px 0 48px; }
   .service-hero-grid { gap: 28px; }

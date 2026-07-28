@@ -15,10 +15,7 @@
       <header class="site-header" data-header>
         <div class="container header-inner">
           <a class="logo" href="index.html" aria-label="ZANGER Consulting Group">
-            <span class="logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 48 56"><path d="M24 3 42 10v22c0 10-7 17-18 21C13 49 6 42 6 32V10L24 3Z"/><path d="M24 14v26M15 22h18M17 22l-6 11h12l-6-11Zm14 0-6 11h12l-6-11Z"/></svg>
-            </span>
-            <span class="logo-text"><strong>ZANGER</strong><small>CONSULTING GROUP</small></span>
+            <img class="logo-image" src="assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516">
           </a>
           <nav class="main-nav" data-nav aria-label="Главная навигация">
             <a href="${sectionHref("services")}">Услуги</a>
@@ -42,10 +39,10 @@
     target.innerHTML = `
       <footer class="footer">
         <div class="container footer-grid">
-          <div><strong>ZANGER</strong><span>CONSULTING GROUP</span><p>Защита ваших интересов — наша профессия</p></div>
+          <div><img class="footer-logo" src="assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516"><p>Защита ваших интересов — наша профессия</p></div>
           <div><h3>Навигация</h3><a href="${sectionHref("services")}">Услуги</a><a href="${sectionHref("advantages")}">Преимущества</a><a href="${sectionHref("about")}">О компании</a><a href="${sectionHref("contacts")}">Контакты</a></div>
           <div><h3>Контакты</h3><a data-phone-link href="tel:+77071633899">+7 707 163 3899</a><a data-whatsapp-link href="https://wa.me/77027771253">+7 702 777 12 53</a><a data-email-link href="mailto:zanger.consulting.group001@gmail.com">zanger.consulting.group001@gmail.com</a></div>
-          <div><h3>Офисы</h3><p>Алматы · Каскелен · Шымкент</p><a data-whatsapp-link href="https://wa.me/77027771253">WhatsApp: +7 702 777 12 53</a><p>Пн–Пт: 09:00–18:00</p></div>
+          <div><h3>Офисы</h3><p>Астана, проспект Мәңгілік Ел, 30<br>БЦ ASTANA PARTNERS</p><p>Алматы: проспект Аль-Фараби, 5/2, ТЦ Jurek Tau, офис P1/P2</p><p>Каскелен: ул. Момышулы, 10, бизнес-центр Тау, офис 310</p><p>Шымкент: ул. Тәуке Хана, 93А</p><a data-whatsapp-link href="https://wa.me/77027771253">WhatsApp: +7 702 777 12 53</a><p>Пн–Пт: 09:00–18:00</p></div>
         </div>
         <div class="container footer-bottom">
           <span>© <span data-year></span> ZANGER Consulting Group</span>

@@ -39,11 +39,11 @@
     const target = document.querySelector("[data-offices]");
     if (!target) return;
     target.innerHTML = window.ZANGER_CONFIG.offices.map((office) => `
-      <article class="contact-card">
+      <article class="contact-card${office.isMain ? " contact-card-main" : ""}">
         <i>${renderIcon("map")}</i>
         <h3>${office.city}</h3>
         <p>${office.address}</p>
-        <a target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/${encodeURIComponent(office.address)}">Открыть на карте</a>
+        <a target="_blank" rel="noopener noreferrer" href="${office.mapUrl || `https://2gis.kz/search/${encodeURIComponent(office.address)}`}">Открыть на карте</a>
       </article>
     `).join("");
   }
