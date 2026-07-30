@@ -43,6 +43,9 @@
 .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 36px; }
 .hero-whatsapp {
   gap: 11px;
+  color: #fff;
+  background: #25D366;
+  box-shadow: 0 14px 34px rgba(37, 211, 102, .26);
 }
 .hero-whatsapp svg {
   width: 23px;
@@ -52,7 +55,9 @@
 }
 .hero-whatsapp:hover,
 .hero-whatsapp:focus-visible {
-  background: #102b4e;
+  color: #fff;
+  background: #1EBE5D;
+  box-shadow: 0 16px 36px rgba(30, 190, 93, .3);
 }
 .hero-badges {
   display: grid;
