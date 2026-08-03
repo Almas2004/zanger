@@ -35,7 +35,7 @@
             </div>
           </nav>
           <div class="header-actions">
-            <a class="header-phone" data-phone-link href="tel:+77071633899">+7 707 163 3899</a>
+            <a class="header-phone" data-phone-link href="tel:+77027771253">+7 702 777 12 53</a>
             <div class="lang-switcher" aria-label="Language">
               <button type="button" data-lang-button="ru">RU</button>
               <button type="button" data-lang-button="kk">KZ</button>
