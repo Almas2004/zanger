@@ -159,14 +159,42 @@
 
 @media (max-width: 767px) {
   .hero {
-    min-height: auto;
+    min-height: calc(100vh - 76px);
+    min-height: calc(100svh - 76px);
+    height: auto;
     background-color: #fff;
+    background-image: none;
+  }
+  .hero::before,
+  .hero::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+  .hero::before {
+    z-index: 0;
     background-image: url("../assets/images/hero-themis-mobile.webp");
-    background-position: right -50px center;
-    background-size: cover;
+    background-position: calc(100% + 96px) center;
+    background-size: auto clamp(640px, 92svh, 740px);
     background-repeat: no-repeat;
   }
+  .hero::after {
+    z-index: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,1) 42%,
+      rgba(255,255,255,.98) 54%,
+      rgba(255,255,255,.9) 64%,
+      rgba(255,255,255,.58) 76%,
+      rgba(255,255,255,.14) 90%,
+      rgba(255,255,255,0) 100%
+    );
+  }
   .hero-grid {
+    position: relative;
+    z-index: 2;
     min-height: auto;
     padding: 42px 0 34px;
   }
@@ -207,12 +235,13 @@
     min-height: 48px;
     font-size: 14px;
   }
+  .whatsapp-float { display: none; }
 }
 
 @media (min-width: 642px) and (max-width: 742px) {
-  .hero {
-    background-position: right -50px center;
-    background-size: cover;
+  .hero::before {
+    background-position: calc(100% + 160px) center;
+    background-size: auto clamp(660px, 88svh, 760px);
   }
 }
 
@@ -257,9 +286,9 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
-    background-position: right -50px center;
-    background-size: cover;
+  .hero::before {
+    background-position: calc(100% + 120px) center;
+    background-size: auto clamp(640px, 92svh, 740px);
   }
   .hero-content > .eyebrow,
   .hero h1,
