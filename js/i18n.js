@@ -6,10 +6,10 @@
   const dictionaries = {
     ru: {
       meta: {
-        homeTitle: "ZANGER CONSULTING GROUP — юридические услуги в Казахстане",
-        homeDescription: "ZANGER CONSULTING GROUP — юридическое сопровождение бизнеса и частных клиентов в Астане, Алматы, Каскелене и Шымкенте.",
-        servicesTitle: "Услуги — ZANGER CONSULTING GROUP",
-        servicesDescription: "Все юридические услуги ZANGER CONSULTING GROUP.",
+        homeTitle: "Юридические услуги в Казахстане | ZANGER Consulting Group",
+        homeDescription: "Юридическая помощь бизнесу и частным клиентам: регистрация ИП, ТОО и АО, судебная защита, взыскание задолженности, банкротство и договорная работа.",
+        servicesTitle: "Юридические услуги в Казахстане — каталог | ZANGER Consulting Group",
+        servicesDescription: "Каталог юридических услуг ZANGER Consulting Group: сопровождение бизнеса, суды, взыскание задолженности, банкротство, регистрация бизнеса и договорная работа.",
         serviceTitle: "Услуга — ZANGER CONSULTING GROUP",
         serviceDescription: "Подробное описание юридической услуги ZANGER CONSULTING GROUP.",
         privacyTitle: "Политика конфиденциальности — ZANGER",
@@ -40,8 +40,8 @@
       },
       home: {
         heroEyebrow: "Защита ваших интересов — наша профессия",
-        heroTitle: 'Ваш <span>надёжный партнёр</span><br><span class="hero-line">в юридических вопросах</span>',
-        heroLead: "Юридическое сопровождение бизнеса и частных клиентов: консультации, судебная защита, взыскание задолженности, банкротство и договорная работа.",
+        heroTitle: 'Юридические услуги <span>для бизнеса</span><br><span class="hero-line">и частных клиентов в Казахстане</span>',
+        heroLead: "Ваш надёжный партнёр в юридических вопросах: консультации, судебная защита, взыскание задолженности, банкротство, регистрация бизнеса и договорная работа.",
         heroCta: "Написать в WhatsApp",
         heroWhatsappMessage: "Здравствуйте! Хочу получить юридическую консультацию.",
         heroWhatsappAria: "Написать в WhatsApp для получения юридической консультации",
@@ -139,10 +139,10 @@
     },
     kk: {
       meta: {
-        homeTitle: "ZANGER CONSULTING GROUP — Қазақстандағы заң қызметтері",
-        homeDescription: "ZANGER CONSULTING GROUP — Астана, Алматы, Қаскелең және Шымкенттегі бизнес пен жеке клиенттерге заңгерлік сүйемелдеу.",
-        servicesTitle: "Қызметтер — ZANGER CONSULTING GROUP",
-        servicesDescription: "ZANGER CONSULTING GROUP ұсынатын барлық заң қызметтері.",
+        homeTitle: "Қазақстандағы заң қызметтері | ZANGER Consulting Group",
+        homeDescription: "Бизнес пен жеке клиенттерге заңгерлік көмек: ИП, ЖШС және АҚ тіркеу, сотта қорғау, берешекті өндіріп алу, банкроттық және шарттық жұмыс.",
+        servicesTitle: "Қазақстандағы заң қызметтері — каталог | ZANGER Consulting Group",
+        servicesDescription: "ZANGER Consulting Group заң қызметтері: бизнесті сүйемелдеу, сотта қорғау, берешекті өндіріп алу, банкроттық, бизнесті тіркеу және шарттық жұмыс.",
         serviceTitle: "Қызмет — ZANGER CONSULTING GROUP",
         serviceDescription: "ZANGER CONSULTING GROUP заң қызметінің толық сипаттамасы.",
         privacyTitle: "Құпиялылық саясаты — ZANGER",
@@ -173,8 +173,8 @@
       },
       home: {
         heroEyebrow: "Мүддеңізді қорғау — біздің кәсібіміз",
-        heroTitle: 'Сіздің <span>сенімді серіктесіңіз</span><br><span class="hero-line">заң мәселелерінде</span>',
-        heroLead: "Бизнес пен жеке клиенттерді заңгерлік сүйемелдеу: кеңес беру, сотта қорғау, берешекті өндіріп алу, банкроттық және шарттық жұмыс.",
+        heroTitle: 'Қазақстандағы <span>бизнес пен жеке клиенттерге</span><br><span class="hero-line">арналған заң қызметтері</span>',
+        heroLead: "Заң мәселелеріндегі сенімді серіктесіңіз: кеңес беру, сотта қорғау, берешекті өндіріп алу, банкроттық, бизнесті тіркеу және шарттық жұмыс.",
         heroCta: "WhatsApp арқылы жазу",
         heroWhatsappMessage: "Сәлеметсіз бе! Заңгерлік консультация алғым келеді.",
         heroWhatsappAria: "Заңгерлік консультация алу үшін WhatsApp арқылы жазу",
@@ -457,13 +457,19 @@
   function getLang() {
     const params = new URLSearchParams(window.location.search);
     const fromUrl = params.get("lang");
+    const fromPath = window.location.pathname.startsWith("/kk/") || window.location.pathname === "/kk";
     const saved = localStorage.getItem(STORAGE_KEY);
-    return SUPPORTED.includes(fromUrl) ? fromUrl : SUPPORTED.includes(saved) ? saved : DEFAULT_LANG;
+    return SUPPORTED.includes(fromUrl) ? fromUrl : fromPath ? "kk" : SUPPORTED.includes(saved) ? saved : DEFAULT_LANG;
   }
 
   function setLang(lang) {
     const next = SUPPORTED.includes(lang) ? lang : DEFAULT_LANG;
     localStorage.setItem(STORAGE_KEY, next);
+    const activeButton = document.querySelector(`[data-lang-button="${next}"][data-lang-href]`);
+    if (activeButton?.dataset.langHref && activeButton.dataset.langHref !== window.location.pathname) {
+      window.location.href = activeButton.dataset.langHref;
+      return;
+    }
     window.ZANGER_I18N.lang = next;
     applyTranslations();
     window.ZANGER_LAYOUT?.renderHeader?.();

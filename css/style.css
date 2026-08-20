@@ -31,7 +31,7 @@
   color: var(--navy);
   display: inline-block;
   font-size: 1em;
-  white-space: nowrap;
+  white-space: normal;
 }
 .hero-lead {
   max-width: 520px;

@@ -86,7 +86,7 @@
                 <i data-icon="${item.icon}"></i>
                 <h3>${item.title}</h3>
                 <p>${item.description}</p>
-                <a href="service.html?slug=${encodeURIComponent(item.slug)}">${t("servicePage.more")}</a>
+                <a href="${window.ZANGER_I18N?.lang === "kk" ? "/kk" : ""}${item.seoPath || `/service.html?slug=${encodeURIComponent(item.slug)}`}">${t("servicePage.more")}</a>
               </article>
             `).join("")}
           </div>

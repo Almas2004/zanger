@@ -30,7 +30,7 @@
           <i>${renderIcon(service.icon)}</i>
           <h3>${service.title}</h3>
           <p>${service.description}</p>
-          <a href="service.html?slug=${encodeURIComponent(service.slug)}">${window.ZANGER_I18N?.t("servicePage.more") || "Подробнее →"}</a>
+          <a href="${window.ZANGER_I18N?.lang === "kk" ? "/kk" : ""}${service.seoPath || `/service.html?slug=${encodeURIComponent(service.slug)}`}">${window.ZANGER_I18N?.t("servicePage.more") || "Подробнее →"}</a>
         </article>
       `).join("");
     });

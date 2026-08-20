@@ -1,6 +1,8 @@
 (function () {
   const i18n = window.ZANGER_I18N;
   const t = (key) => i18n ? i18n.t(key) : key;
+  const langPrefix = () => i18n?.lang === "kk" ? "/kk" : "";
+  const path = (value) => `${langPrefix()}${value}`;
 
   function isHomePage() {
     const path = window.location.pathname.split("/").pop() || "index.html";
@@ -8,7 +10,13 @@
   }
 
   function sectionHref(section) {
-    return isHomePage() ? `#${section}` : `index.html#${section}`;
+    return isHomePage() ? `#${section}` : `${path("/")}#${section}`;
+  }
+
+  function switchLanguageHref(lang) {
+    const current = window.location.pathname.replace(/\/index\.html$/, "/");
+    const withoutLang = current.startsWith("/kk/") ? current.slice(3) || "/" : current;
+    return lang === "kk" ? `/kk${withoutLang === "/" ? "/" : withoutLang}` : withoutLang || "/";
   }
 
   function renderHeader() {
@@ -17,8 +25,8 @@
     target.innerHTML = `
       <header class="site-header" data-header>
         <div class="container header-inner">
-          <a class="logo" href="index.html" aria-label="ZANGER Consulting Group">
-            <img class="logo-image" src="assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516">
+          <a class="logo" href="${path("/")}" aria-label="ZANGER Consulting Group">
+            <img class="logo-image" src="/assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516">
           </a>
           <nav class="main-nav" data-nav aria-label="${t("header.navLabel")}">
             <a href="${sectionHref("services")}">${t("header.services")}</a>
@@ -29,16 +37,16 @@
               <a class="header-phone" data-phone-link href="${window.ZANGER_CONFIG.phoneHref}">${window.ZANGER_CONFIG.phone}</a>
               <a class="mobile-whatsapp-link" data-whatsapp-link href="${window.ZANGER_CONFIG.whatsappHref}" target="_blank" rel="noopener noreferrer">${t("header.whatsapp")}</a>
               <div class="lang-switcher" aria-label="Language">
-                <button type="button" data-lang-button="ru">RU</button>
-                <button type="button" data-lang-button="kk">KZ</button>
+                <button type="button" data-lang-button="ru" data-lang-href="${switchLanguageHref("ru")}">RU</button>
+                <button type="button" data-lang-button="kk" data-lang-href="${switchLanguageHref("kk")}">KZ</button>
               </div>
             </div>
           </nav>
           <div class="header-actions">
             <a class="header-phone" data-phone-link href="tel:+77027771253">+7 702 777 12 53</a>
             <div class="lang-switcher" aria-label="Language">
-              <button type="button" data-lang-button="ru">RU</button>
-              <button type="button" data-lang-button="kk">KZ</button>
+              <button type="button" data-lang-button="ru" data-lang-href="${switchLanguageHref("ru")}">RU</button>
+              <button type="button" data-lang-button="kk" data-lang-href="${switchLanguageHref("kk")}">KZ</button>
             </div>
             <button class="menu-toggle" data-menu-toggle type="button" aria-label="${t("header.menu")}"><span></span><span></span><span></span></button>
           </div>
@@ -55,7 +63,7 @@
     target.innerHTML = `
       <footer class="footer">
         <div class="container footer-grid">
-          <div><img class="footer-logo" src="assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516"><p>${t("footer.tagline")}</p></div>
+          <div><img class="footer-logo" src="/assets/logo/zanger-logo-horizontal.webp" alt="ZANGER Consulting Group" width="1953" height="516"><p>${t("footer.tagline")}</p></div>
           <div><h3>${t("footer.nav")}</h3><a href="${sectionHref("services")}">${t("header.services")}</a><a href="${sectionHref("advantages")}">${t("header.advantages")}</a><a href="${sectionHref("about")}">${t("header.about")}</a><a href="${sectionHref("contacts")}">${t("header.contacts")}</a></div>
           <div><h3>${t("footer.contacts")}</h3><a data-phone-link href="${window.ZANGER_CONFIG.phoneHref}">${window.ZANGER_CONFIG.phone}</a><a data-whatsapp-link href="${window.ZANGER_CONFIG.whatsappHref}">${window.ZANGER_CONFIG.whatsapp}</a><a data-email-link href="mailto:zanger.consulting.group001@gmail.com">zanger.consulting.group001@gmail.com</a></div>
           <div><h3>${t("footer.offices")}</h3>${(i18n?.offices ? i18n.offices() : window.ZANGER_CONFIG.offices).map((office) => `<p>${office.address}</p>`).join("")}<a data-whatsapp-link href="${window.ZANGER_CONFIG.whatsappHref}">WhatsApp: ${window.ZANGER_CONFIG.whatsapp}</a><p>${t("footer.hours")}</p></div>
@@ -63,14 +71,14 @@
         <div class="container footer-bottom">
           <span>© <span data-year></span> ZANGER Consulting Group</span>
           <ul class="footer-legal-links" aria-label="${t("footer.legalLabel")}">
-            <li><a href="privacy.html">${t("footer.privacy")}</a></li>
-            <li><a href="terms.html">${t("footer.terms")}</a></li>
+            <li><a href="${path("/privacy.html")}">${t("footer.privacy")}</a></li>
+            <li><a href="${path("/terms.html")}">${t("footer.terms")}</a></li>
           </ul>
         </div>
       </footer>
       <button class="scroll-top" data-scroll-top type="button" aria-label="${t("footer.toTop")}">↑</button>
       <a class="whatsapp-float" data-whatsapp-link href="${window.ZANGER_CONFIG.whatsappHref}" target="_blank" rel="noopener noreferrer" aria-label="${t("footer.whatsapp")}" title="WhatsApp">
-        <img src="assets/icons/whatsapp.png" alt="" width="30" height="30">
+        <img src="/assets/icons/whatsapp.png" alt="" width="30" height="30">
       </a>
       <div class="modal" data-modal aria-hidden="true">
         <div class="modal-backdrop" data-close-modal></div>

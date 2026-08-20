@@ -1,6 +1,7 @@
 window.ZANGER_SERVICES = [
   {
     slug: "yuridicheskoe-soprovozhdenie-biznesa",
+    seoPath: "/services/yuridicheskoe-soprovozhdenie-biznesa/",
     title: "Юридическое сопровождение бизнеса",
     icon: "briefcase",
     description: "Постоянная правовая поддержка компании: договоры, претензии, риски и операционные вопросы.",
@@ -9,6 +10,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "sudebnoe-predstavitelstvo",
+    seoPath: "/services/sudebnoe-predstavitelstvo/",
     title: "Судебное представительство",
     icon: "gavel",
     description: "Подготовка позиции, процессуальных документов и защита интересов клиента в суде.",
@@ -17,6 +19,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "vzyskanie-dolgov",
+    seoPath: "/services/vzyskanie-zadolzhennosti/",
     title: "Взыскание долгов",
     icon: "coins",
     description: "Досудебная и судебная работа с задолженностью, переговорами и исполнением решений.",
@@ -25,6 +28,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "bankrotstvo-fizicheskih-lic",
+    seoPath: "/services/bankrotstvo/",
     title: "Банкротство",
     icon: "scale",
     description: "Оценка долговой ситуации, подготовка документов и сопровождение процедуры.",
@@ -33,6 +37,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "registraciya-ip-i-too",
+    seoPath: "/services/registratsiya-ip-too-ao/",
     title: "Регистрация бизнеса",
     icon: "building",
     description: "Помощь с выбором формы, подготовкой документов и запуском ИП, ТОО или АО.",
@@ -41,6 +46,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "razrabotka-i-proverka-dogovorov",
+    seoPath: "/services/dogovornaya-rabota/",
     title: "Договорная работа",
     icon: "file",
     description: "Разработка, проверка и корректировка договоров с понятной оценкой рисков.",
@@ -49,6 +55,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "bankrotstvo-yuridicheskih-lic",
+    seoPath: "/services/bankrotstvo-yuridicheskih-lic/",
     title: "Банкротство юридических лиц",
     icon: "landmark",
     description: "Сопровождение компании и руководителей при сложных долговых и процедурных вопросах.",
@@ -57,6 +64,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "pravovoy-audit",
+    seoPath: "/services/pravovoy-audit/",
     title: "Правовой аудит",
     icon: "shield",
     description: "Проверка документов, процессов и обязательств, чтобы заранее увидеть юридические риски.",
@@ -65,6 +73,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "soprovozhdenie-sdelok",
+    seoPath: "/services/soprovozhdenie-sdelok/",
     title: "Сопровождение сделок",
     icon: "handshake",
     description: "Юридическое сопровождение переговоров, документов и закрытия сделки.",
@@ -73,6 +82,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "semeynye-spory",
+    seoPath: "/services/semeynye-spory/",
     title: "Семейные споры",
     icon: "users",
     description: "Деликатная правовая помощь по семейным вопросам и имущественным разногласиям.",
@@ -81,6 +91,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "trudovye-spory",
+    seoPath: "/services/trudovye-spory/",
     title: "Трудовые споры",
     icon: "briefcase",
     description: "Помощь работодателям и сотрудникам в трудовых конфликтах и документах.",
@@ -89,6 +100,7 @@ window.ZANGER_SERVICES = [
   },
   {
     slug: "spory-s-gosudarstvennymi-organami",
+    seoPath: "/services/spory-s-gosudarstvennymi-organami/",
     title: "Споры с государственными органами",
     icon: "landmark",
     description: "Подготовка жалоб, заявлений и позиции при взаимодействии с госорганами.",
